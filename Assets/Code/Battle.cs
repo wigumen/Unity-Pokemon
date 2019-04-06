@@ -46,7 +46,7 @@ public class Battle : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(new Rect(0, Screen.height - (Screen.height / 3), Screen.width, Screen.height / 3), "nigger");
+        GUI.Box(new Rect(0, Screen.height - (Screen.height / 3), Screen.width, Screen.height / 3), "");
 
         //Player HP
         helpers.GUIDrawRect(new Rect(Screen.width - (Screen.width / 2.5f), Screen.height - (Screen.height / 3) - (Screen.height / 11), Screen.width / 2.8f, Screen.height / 16), Color.red);

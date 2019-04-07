@@ -25,7 +25,7 @@ public static class PlayerStats
         gengar.id = 94;
         gengar.stats = new PokemonStats(100, 100, 100);
         gengar.attacks = new List<Attack>();
-        gengar.attacks.Add(new Tackle());
+        gengar.attacks.Add(Attack.Tackle());
         gengar.name = Pokedex.list[gengar.id - 1].name;
         testPok.Add(gengar);
 

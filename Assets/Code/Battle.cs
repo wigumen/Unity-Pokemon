@@ -34,7 +34,7 @@ public class Battle : MonoBehaviour
         badguy.id = 109;
         badguy.stats = new PokemonStats(100, 100, 50);
         badguy.attacks = new List<Attack>();
-        badguy.attacks.Add(new Tackle());
+        badguy.attacks.Add(Attack.Tackle());
         EnemyPokemon.Add(badguy);
 
         PlayerSpawn = pobj.AddComponent<DrawPokemon>();
@@ -59,16 +59,16 @@ public class Battle : MonoBehaviour
             switch (i) //I got no fucking clue man????
             {
                 case 0:
-                    AttackButtons[0].onClick.AddListener(delegate { Attack(0); });
+                    AttackButtons[0].onClick.AddListener(delegate { doAttack(0); });
                     break;
                 case 1:
-                    AttackButtons[1].onClick.AddListener(delegate { Attack(1); });
+                    AttackButtons[1].onClick.AddListener(delegate { doAttack(1); });
                     break;
                 case 2:
-                    AttackButtons[2].onClick.AddListener(delegate { Attack(2); });
+                    AttackButtons[2].onClick.AddListener(delegate { doAttack(2); });
                     break;
                 case 3:
-                    AttackButtons[3].onClick.AddListener(delegate { Attack(3); });
+                    AttackButtons[3].onClick.AddListener(delegate { doAttack(3); });
                     break;
             }
 
@@ -103,7 +103,7 @@ public class Battle : MonoBehaviour
 
     }
 
-    void Attack(int btn)
+    void doAttack(int btn)
     {
         var playerAttacks = PlayerPokemon[playerSelected].attacks;
         selectedAtk = playerAttacks[btn];

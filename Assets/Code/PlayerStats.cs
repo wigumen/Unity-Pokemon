@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using UnityEngine;
 public static class PlayerStats
 {
-    public static List<Pokemon> Pokemons { get; set; }
+    public static List<PokemonActor> Pokemons { get; set; }
     public static Vector3 playerPos { get; set; }
 
-    public static void addPokemon(Pokemon pok)
+    public static void addPokemon(PokemonActor pok)
     {
         Pokemons.Add(pok);
     }
         
     static PlayerStats()
     {
-        Pokemons = new List<Pokemon>();
+        Pokemons = new List<PokemonActor>();
     }
 }

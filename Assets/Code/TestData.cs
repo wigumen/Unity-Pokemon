@@ -7,8 +7,8 @@ public class TestData : MonoBehaviour
 
     void Start()
     {
-        List<Pokemon> testPok = new List<Pokemon>();
-        Pokemon gengar = new Pokemon();
+        List<PokemonActor> testPok = new List<PokemonActor>();
+        PokemonActor gengar = new PokemonActor();
         gengar.id = 94;
         gengar.stats = new PokemonStats(100, 100, 100);
         gengar.attacks = new List<Attack>();

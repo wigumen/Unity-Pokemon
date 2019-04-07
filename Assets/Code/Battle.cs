@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Battle : MonoBehaviour
 {
-    private List<Pokemon> PlayerPokemon = PlayerStats.Pokemons;
-    private List<Pokemon> EnemyPokemon = new List<Pokemon>();
+    private List<PokemonActor> PlayerPokemon = PlayerStats.Pokemons;
+    private List<PokemonActor> EnemyPokemon = new List<PokemonActor>();
 
+    public Button[] AttackButtons;
     private int playerSelected = 0;
     private int enemySelected = 0;
 
@@ -17,6 +18,9 @@ public class Battle : MonoBehaviour
     public GameObject pobj;
     public GameObject eobj;
 
+    public GameObject MainMenu;
+    public GameObject Fight;
+
     private DrawPokemon PlayerSpawn;
     private DrawPokemon EnemySpawn;
 
@@ -25,12 +29,19 @@ public class Battle : MonoBehaviour
     void Start()
     {
         //Generate rand for now
-        Pokemon badguy = new Pokemon();
+        PokemonActor badguy = new PokemonActor();
         badguy.id = 109;
         badguy.stats = new PokemonStats(100, 100, 50);
         badguy.attacks = new List<Attack>();
         badguy.attacks.Add(new Tackle());
         EnemyPokemon.Add(badguy);
+
+        PokemonActor gengar = new PokemonActor();
+        gengar.id = 94;
+        gengar.stats = new PokemonStats(100, 100, 100);
+        gengar.attacks = new List<Attack>();
+        gengar.attacks.Add(new Tackle());
+        PlayerPokemon.Add(gengar);
 
         PlayerSpawn = pobj.AddComponent<DrawPokemon>();
         EnemySpawn = eobj.AddComponent<DrawPokemon>();
@@ -40,14 +51,48 @@ public class Battle : MonoBehaviour
         print(PlayerPokemon[0]);
         EnemySpawn.pokemon = EnemyPokemon[enemySelected];
 
+        for(int i=0; i<4; i++)
+        {
+            Attack curatk = null;
+            try
+            {
+                curatk = PlayerPokemon[playerSelected].attacks[i];
+            }
+            catch { }
+
+            var curbtn = AttackButtons[i];
+            //AttackButtons[i].onClick.AddListener(delegate { Attack(i); }); Why this Does not woooork
+            switch (i) //I got no fucking clue man????
+            {
+                case 0:
+                    AttackButtons[0].onClick.AddListener(delegate { Attack(0); });
+                    break;
+                case 1:
+                    AttackButtons[1].onClick.AddListener(delegate { Attack(1); });
+                    break;
+                case 2:
+                    AttackButtons[2].onClick.AddListener(delegate { Attack(2); });
+                    break;
+                case 3:
+                    AttackButtons[3].onClick.AddListener(delegate { Attack(3); });
+                    break;
+            }
+
+            if (curatk != null)
+            {
+                curbtn.GetComponentInChildren<Text>().text = curatk.Name;
+            }
+            else
+            {
+                curbtn.gameObject.SetActive(false);
+            }
+        }
 
     }
 
 
     void OnGUI()
     {
-        GUI.Box(new Rect(0, Screen.height - (Screen.height / 3), Screen.width, Screen.height / 3), "");
-
         //Player HP
         helpers.GUIDrawRect(new Rect(Screen.width - (Screen.width / 2.5f), Screen.height - (Screen.height / 3) - (Screen.height / 11), Screen.width / 2.8f, Screen.height / 16), Color.red);
         helpers.GUIDrawRect(new Rect(Screen.width - (Screen.width / 2.5f), Screen.height - (Screen.height / 3) - (Screen.height / 11), (Screen.width / 2.8f) * (PlayerPokemon[playerSelected].hp / 100.0f), Screen.height / 16), Color.green);
@@ -60,24 +105,22 @@ public class Battle : MonoBehaviour
             inTurn = false;
         }
 
+        
+
+    }
+
+    void Attack(int btn)
+    {
+        var playerAttacks = PlayerPokemon[playerSelected].attacks;
+        selectedAtk = playerAttacks[btn];
+
         if (!inTurn)
         {
-            var playerAttacks = PlayerPokemon[playerSelected].attacks;
-            
-
-            if (GUI.Button(new Rect(15, Screen.height - (Screen.height / 3) + 15, Screen.width / 6, Screen.height / 9), playerAttacks[0].name))
-            {
-                selectedAtk = playerAttacks[0];
-                doTurn(selectedAtk);
-            }
-
-            if(selectedAtk != null)
-            {
-                inTurn = true;
-                //EnemyPokemon[enemySelected].takeDmg(selectedAtk);
-            }
+            selectedAtk = playerAttacks[btn];
+            doTurn(selectedAtk);
+            MainMenu.SetActive(true);
+            Fight.SetActive(false);
         }
-
     }
 
     void doTurn(Attack playeratk)

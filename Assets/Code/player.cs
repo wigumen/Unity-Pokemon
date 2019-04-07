@@ -5,7 +5,7 @@ using SuperTiled2Unity;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private float movepx = 0.16f;
     public float speedDelay = 0.05f;
@@ -17,8 +17,10 @@ public class player : MonoBehaviour
     public Sprite idleSpriteD;
     public Sprite idleSpriteS;
     public Sprite idleSpriteU;
+    private Sprite curIdle;
     private SpriteRenderer curSprite;
     private float lastMove;
+    public bool isPaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("w") || Input.GetKey("s") || Input.GetKey("a") || Input.GetKey("d"))
+        if (Input.GetKey("w") && !isPaused || Input.GetKey("s") && !isPaused || Input.GetKey("a") && !isPaused || Input.GetKey("d") && !isPaused)
         {
             if (Time.time > lastMove + speedDelay)
             {
@@ -42,24 +44,28 @@ public class player : MonoBehaviour
                 if (Input.GetKey("w"))
                 {
                     bufferPos = bufferPos + new Vector3(0, movepx);
+                    curIdle = idleSpriteU;
                     animate.Play("p_walk_u");
                 }
                 else if (Input.GetKey("s"))
                 {
                     bufferPos = bufferPos + new Vector3(0, -movepx);
                     animate.Play("p_walk_d");
+                    curIdle = idleSpriteD;
                 }
                 else if (Input.GetKey("a"))
                 {
                     bufferPos = bufferPos + new Vector3(-movepx, 0);
                     animate.Play("p_walk_s");
                     gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    curIdle = idleSpriteS;
                 }
                 else if (Input.GetKey("d"))
                 {
                     bufferPos = bufferPos + new Vector3(movepx, 0);
                     animate.Play("p_walk_s");
                     gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    curIdle = idleSpriteS;
                 }
                 if (col.GetTile(col.WorldToCell(bufferPos)) == null)
                 {

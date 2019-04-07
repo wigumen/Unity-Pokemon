@@ -6,7 +6,7 @@ public class DrawPokemon : MonoBehaviour
 {
     private SpriteRenderer sprite;
     public Sprite[] pksprite;
-    public Pokemon pokemon;
+    public PokemonActor pokemon;
     public bool back = false;
 
     // Start is called before the first frame update

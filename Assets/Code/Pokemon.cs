@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 public class Pokemon
 {
     public string name { get; set; }
+    public int[] types { get; set; }
     public int hp { get; set; }
     public int attack { get; set; }
     public int defense { get; set; }
@@ -14,9 +15,10 @@ public class Pokemon
     public int spdefense { get; set; }
     public int speed { get; set; }
 
-    public Pokemon(string n, int h, int a, int d, int spa, int spd, int sped)
+    public Pokemon(string n, int[] t, int h, int a, int d, int spa, int spd, int sped)
     {
         name = n;
+        types = t;
         hp = h;
         attack = a;
         defense = d;

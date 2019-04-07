@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Battle : MonoBehaviour
 {
     private List<PokemonActor> PlayerPokemon = PlayerStats.Pokemons;
@@ -35,13 +36,6 @@ public class Battle : MonoBehaviour
         badguy.attacks = new List<Attack>();
         badguy.attacks.Add(new Tackle());
         EnemyPokemon.Add(badguy);
-
-        PokemonActor gengar = new PokemonActor();
-        gengar.id = 94;
-        gengar.stats = new PokemonStats(100, 100, 100);
-        gengar.attacks = new List<Attack>();
-        gengar.attacks.Add(new Tackle());
-        PlayerPokemon.Add(gengar);
 
         PlayerSpawn = pobj.AddComponent<DrawPokemon>();
         EnemySpawn = eobj.AddComponent<DrawPokemon>();
@@ -132,15 +126,25 @@ public class Battle : MonoBehaviour
 
         if (player.stats.speed >= enemy.stats.speed)
         {
-            enemy.takeDmg(playeratk);
-            if(enemy.hp>0)
+            if (!enemy.takeDmg(playeratk))
+            {
                 player.takeDmg(enemyAtk);
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
+                
         }
         else
         {
-            player.takeDmg(enemyAtk);
-            if (player.hp > 0)
+            if (!player.takeDmg(enemyAtk))
+            {
                 enemy.takeDmg(playeratk);
+            } else
+            {
+                SceneManager.LoadScene(0);
+            }
             
         }
         print(enemy.hp + " | " + player.hp);

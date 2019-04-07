@@ -7,19 +7,35 @@ public class PokemonActor
     int type;
     public int id;
     public int hp = 100;
+    public string name = "missing.no";
     public PokemonStats stats;
     public List<Attack> attacks = new List<Attack>(4);
 
-    private string[] types = { "Bug", "Dragon", "Electric", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Phychic", "Rock", "Water" };
+    private string[] types = { "Bug", "Dragon", "Electric", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Phychic", "Rock", "Water", "Steel", "Dark" };
 
-    public void takeDmg(Attack a)
+    public bool takeDmg(Attack a)
     {
+        bool rPointer = false;
         int dmgRng = a.Power - Random.Range(0, a.Range);
-        
+
+        if (hp - dmgRng <= 0)
+            rPointer = true;
+
         hp = hp - dmgRng;
 
         if (hp < 0)
             hp = 0;
+
+        return rPointer;
+    }
+
+    public void init(int id)
+    {
+        var curpok = Pokedex.list[id];
+        this.id = id;
+
+        name = curpok.name;
+
     }
 }
 

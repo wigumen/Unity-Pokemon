@@ -9,9 +9,13 @@ public class GameMenu : MonoBehaviour
     public GameObject Arrow;
     public GameObject Menu;
     public GameObject[] MenuItems;
+    public Button[] MenuPokemons;
+    public GameObject MenuPokemonPanel;
     int arrowIndex = 0;
     float lastMove;
     RectTransform rect;
+    bool main = true;
+    bool pokemonScreen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +31,30 @@ public class GameMenu : MonoBehaviour
         bool pausefc = false;
         if (player.isPaused && Time.time > lastMove + 0.02f)
         {
-            if (Input.GetKeyDown("space"))
+
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                player.isPaused = false;
-                pausefc = true;
+                if (pokemonScreen)
+                {
+                    pokemonScreen = false;
+                    main = true;
+                    arrowIndex = 0;
+                    pausefc = true;
+                }
+                if(main && !pausefc)
+                    player.isPaused = false;
+            }
+
+            if(Input.GetKeyDown("e"))
+            {
+                switch (arrowIndex)
+                {
+                    case 1:
+                        pokemonScreen = true;
+                        main = false;
+                        arrowIndex = 0;
+                        break;
+                }
             }
 
             if (Input.GetKeyDown("w"))
@@ -43,7 +67,7 @@ public class GameMenu : MonoBehaviour
             }
             else if (Input.GetKeyDown("s"))
             {
-                if (arrowIndex < 6)
+                if (arrowIndex < 5)
                 {
                     arrowIndex++;
                     lastMove = Time.time;
@@ -58,8 +82,32 @@ public class GameMenu : MonoBehaviour
                 player.isPaused = true;
             }
         }
+        if(main == true)
+            rect.transform.position = new Vector3(MenuItems[arrowIndex].transform.position.x - (Screen.width/30), MenuItems[arrowIndex].transform.position.y);
+            MenuPokemonPanel.SetActive(false);
+        if (main == false && pokemonScreen)
+        {
+            MenuPokemonPanel.SetActive(true);
+            rect.transform.position = new Vector3(MenuPokemons[arrowIndex].transform.position.x - (Screen.width/7), MenuPokemons[arrowIndex].transform.position.y);
+            for(int i=0; i<6; i++)
+            {
+                PokemonActor curpok = null;
+                try
+                {
+                    curpok = PlayerStats.Pokemons[i];
+                }
+                catch { }
 
-        rect.transform.position = new Vector3(rect.transform.position.x, MenuItems[arrowIndex].transform.position.y);
+                if(curpok != null)
+                {
+                    MenuPokemons[i].GetComponentInChildren<Text>().text = curpok.name;
+                    MenuPokemons[i].GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("Sprites/icons/" + curpok.id);
+                } else
+                {
+                    MenuPokemons[i].gameObject.SetActive(false);
+                }
+            }
+        }
 
         Menu.SetActive(player.isPaused);
     }

@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         animate.StopPlayback();
         lastMove = 0.0f;
         curSprite = gameObject.GetComponent<SpriteRenderer>();
+        transform.position = PlayerStats.playerPos;
     }
 
     // Update is called once per frame

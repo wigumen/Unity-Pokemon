@@ -11,8 +11,11 @@ public class Player : MonoBehaviour
     public float speedDelay = 0.05f;
     public GameObject colMap;
     public GameObject bkgMap;
+    public GameObject routeMap;
     private Tilemap col;
     private Tilemap bkg;
+    private Tilemap route;
+    private string curRoute;
     private Animator animate;
     public Sprite idleSpriteD;
     public Sprite idleSpriteS;
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour
     {
         col = colMap.GetComponent<Tilemap>();
         bkg = bkgMap.GetComponent<Tilemap>();
+        route = routeMap.GetComponent<Tilemap>();
         animate = gameObject.GetComponent<Animator>();
         animate.StopPlayback();
         lastMove = 0.0f;
@@ -41,6 +45,7 @@ public class Player : MonoBehaviour
         {
             if (Time.time > lastMove + speedDelay)
             {
+                curRoute = route.GetTile(route.WorldToCell(transform.position)).name;
                 Vector3 bufferPos = transform.position;
                 if (Input.GetKey("w"))
                 {
@@ -78,6 +83,9 @@ public class Player : MonoBehaviour
                 {
                     if (Random.Range(0, 1000) < 200)
                     {
+                        var rngPokemon = Routes.PokemonTable(curRoute);
+                        
+                        PlayerStats.Enemy.Add(rngPokemon[Random.Range(0, rngPokemon.Count)]);
                         SceneManager.LoadScene(1);
                     }
                 }

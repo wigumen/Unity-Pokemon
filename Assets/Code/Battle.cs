@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Battle : MonoBehaviour
 {
     private List<PokemonActor> PlayerPokemon = PlayerStats.Pokemons;
-    private List<PokemonActor> EnemyPokemon = new List<PokemonActor>();
+    public List<PokemonActor> EnemyPokemon = PlayerStats.Enemy;
 
     public Button[] AttackButtons;
     private int playerSelected = 0;
@@ -14,10 +14,12 @@ public class Battle : MonoBehaviour
 
     private bool inTurn = false;
 
-    private bool isTrainer = false;
+    public bool isTrainer = false;
 
     public GameObject pobj;
     public GameObject eobj;
+
+    public GameObject bag;
 
     public GameObject MainMenu;
     public GameObject Fight;
@@ -29,13 +31,10 @@ public class Battle : MonoBehaviour
 
     void Start()
     {
+        PlayerStats.inCombat = true;
         //Generate rand for now
-        PokemonActor badguy = new PokemonActor();
-        badguy.id = 109;
-        badguy.stats = new PokemonStats(100, 100, 50);
-        badguy.attacks = new List<Attack>();
-        badguy.attacks.Add(Attack.Tackle());
-        EnemyPokemon.Add(badguy);
+
+        bag.SetActive(false);
 
         PlayerSpawn = pobj.AddComponent<DrawPokemon>();
         EnemySpawn = eobj.AddComponent<DrawPokemon>();
@@ -99,7 +98,11 @@ public class Battle : MonoBehaviour
             inTurn = false;
         }
 
-        
+        if (!PlayerStats.inCombat)
+        {
+            PlayerStats.Enemy = new List<PokemonActor>();
+            SceneManager.LoadScene(0);
+        }
 
     }
 
@@ -132,7 +135,7 @@ public class Battle : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                PlayerStats.inCombat = false;
             }
                 
         }
@@ -143,10 +146,11 @@ public class Battle : MonoBehaviour
                 enemy.takeDmg(playeratk);
             } else
             {
-                SceneManager.LoadScene(0);
+                PlayerStats.inCombat = false;
             }
             
         }
+       
         print(enemy.hp + " | " + player.hp);
         selectedAtk = null;
     }

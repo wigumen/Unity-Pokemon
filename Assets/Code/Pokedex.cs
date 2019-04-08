@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-/*0 0,
-  1 1,
-  2 2,
-  3 3, 
-  4 4,
-  5 5,
-  6 6,
-  7 7,
-  8 8,
-  9 9,
-  10 10,
-  11 11,
-  12 12,
-  13 13,
+﻿/*
+  "Bug" 0,
+  "Dragon" 1,
+  "Electric" 2,
+  "Fighting" 3, 
+  "Fire" 4,
+  "Flying" 5,
+  "Ghost" 6,
+  "Grass" 7,
+  "Ground" 8,
+  "Ice" 9,
+  "Normal" 10,
+  "Poison" 11,
+  "Phychic" 12,
+  "Rock" 13,
   "Water 14"
+  "Steel" 15
+  "Dark" 16
 */
 
 public static class Pokedex

@@ -5,16 +5,11 @@ ScriptedImporter:
     100000: _MapPrfab/world
     100002: _MapPrfab/world/Background
     100004: _MapPrfab/world/Collision
-    100006: _MapPrfab/world/Foreground
-    100008: _MapPrfab/world/Spawn Point
-    100010: _MapPrfab/world/Spawn Point/Player
+    100008: _MapPrfab/world/Routedata
     400000: _MapPrfab/world/Transform
     400002: _MapPrfab/world/Background/Transform
     400004: _MapPrfab/world/Collision/Transform
-    400006: _MapPrfab/world/Foreground/Transform
-    400008: _MapPrfab/world/Spawn Point/Transform
-    400010: _MapPrfab/world/Spawn Point/Player/Transform
-    6100000: _MapPrfab/world/Spawn Point/Player/BoxCollider2D
+    400008: _MapPrfab/world/Routedata/Transform
     11400000: _MapPrfab/world/MonoBehaviour-SuperTiled2Unity.SuperMap
     11400002: _MapPrfab/world/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
     11400004: _MapPrfab/world/Background/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
@@ -23,23 +18,18 @@ ScriptedImporter:
     11400010: _MapPrfab/world/Collision/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
     11400012: _MapPrfab/world/Collision/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
     11400014: _MapPrfab/world/Collision/MonoBehaviour-SuperTiled2Unity.TilemapData
-    11400016: _MapPrfab/world/Foreground/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
-    11400018: _MapPrfab/world/Foreground/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400020: _MapPrfab/world/Foreground/MonoBehaviour-SuperTiled2Unity.TilemapData
-    11400022: _MapPrfab/world/Spawn Point/MonoBehaviour-SuperTiled2Unity.SuperObjectLayer
-    11400024: _MapPrfab/world/Spawn Point/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
-    11400026: _MapPrfab/world/Spawn Point/Player/MonoBehaviour-SuperTiled2Unity.SuperObject
-    11400028: _MapPrfab/world/Spawn Point/Player/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
-    11400030: _MapPrfab/world/Spawn Point/Player/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400022: _MapPrfab/world/Routedata/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
+    11400024: _MapPrfab/world/Routedata/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400026: _MapPrfab/world/Routedata/MonoBehaviour-SuperTiled2Unity.TilemapData
     11400032: _superAsset
     100100000: _MapPrfab
     2569400265252428796: _MapPrfab/world/Grid
     3664157343022684176: _MapPrfab/world/Background/TilemapRenderer
     3664157343022684178: _MapPrfab/world/Collision/TilemapRenderer
-    3664157343022684180: _MapPrfab/world/Foreground/TilemapRenderer
+    3664157343022684182: _MapPrfab/world/Routedata/TilemapRenderer
     8195094279510102542: _MapPrfab/world/Background/Tilemap
     8195094279510102544: _MapPrfab/world/Collision/Tilemap
-    8195094279510102546: _MapPrfab/world/Foreground/Tilemap
+    8195094279510102548: _MapPrfab/world/Routedata/Tilemap
   externalObjects: {}
   userData: 
   assetBundleName: 

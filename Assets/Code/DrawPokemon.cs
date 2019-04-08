@@ -19,7 +19,7 @@ public class DrawPokemon : MonoBehaviour
                 pksprite = Resources.LoadAll<Sprite>("Sprites/Sheets/pokemon-b");
 
         print(pksprite);
-            sprite.sprite = pksprite[pokemon.id - 1];
+            sprite.sprite = pksprite[pokemon.id];
     }
     
 

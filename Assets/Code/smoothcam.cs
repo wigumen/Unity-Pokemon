@@ -7,7 +7,7 @@ public class smoothcam : MonoBehaviour
 
     private void Start()
     {
-        transform.position = PlayerStats.playerPos;
+        //transform.position = PlayerStats.playerPos;
     }
 
     private void Update()
